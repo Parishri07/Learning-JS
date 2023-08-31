@@ -7,7 +7,7 @@ let promise = new Promise(function(resolve, reject){
  setTimeout(()=>{
      console.log("My name is Anthony Gonzalves Two");
  },2000)
- console.log("hello threee");
+ console.log("hello three");
  
  console.log(promise);
  //prints that promise is resolved and fulfilled
