@@ -17,7 +17,14 @@ let p1 = new Promise(function(resolve, reject){
   })
  
  p1.then((value)=>{
-     console.log(value)
+     console.log("Hurray")
+     return new Promise((resolve,reject) => {
+         setTimeout(()=>{
+            resolve(4)
+         },2000)
+     })
+ }).then((value) => {
+    console.log(value)
  })
  
  // p2.catch((error)=>{
