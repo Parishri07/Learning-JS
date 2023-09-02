@@ -3,7 +3,7 @@ setTimeout(()=>{
 },2000)
 
 try{
-    console.log(kartik)
+    console.log(Neil);
 }
 catch(error){
     console.log(error);
