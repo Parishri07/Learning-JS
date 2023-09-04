@@ -1,14 +1,10 @@
-const createTodo = async () =>{
+const createTodo = async (todo) =>{
     let options = {
         method: "POST",
         headers: {
             "Content-type": "application/json"
         },  
-        body: JSON.stringify({
-            title: 'Good',
-            body: 'Day',
-            userId: 101,
-        }),
+        body: JSON.stringify(todo),
     }
     //JSON.stringify converts JS object to string
     //JSON.parse converts valid JSON string to JS object
@@ -25,8 +21,20 @@ const createTodo = async () =>{
     return response
 }
 
+const getTodo = async (id) =>{
+  let response = await fetch('https://jsonplaceholder.typicode.com/posts/' + id)
+  let r = await response.json()
+  return r
+}
+
 const mainFunc = async () =>{
-    let todo = await createTodo();
-    console.log(todo);
+    let todo = {
+         title: 'Good',
+         body:'day',
+         userId: 101,
+    }
+    let mftodo = await createTodo(todo);
+    console.log(mftodo);
+    console.log(await getTodo(23))
 }
 mainFunc();
