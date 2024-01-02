@@ -1,0 +1,46 @@
+<!-- The Window Scroller: You are developing a single-page application with a smooth scrolling effect. Implement a function named smoothScrollToTop that smoothly scrolls the window to the top when called. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+  function smoothScrollToTop(duration) {
+    const start = window.scrollY;
+    const target = 0;
+    // <!-- The target scroll position (0 for scrolling to the top) -->
+    const distance = target - start;
+    const startTime = performance.now();
+  
+    function easeInOutQuad(time, startValue, changeInValue, duration) {
+      time /= duration / 2;
+      if (time < 1) return (changeInValue / 2) * time * time + startValue;
+      time--;
+      return (-changeInValue / 2) * (time * (time - 2) - 1) + startValue;
+    }
+    // <!-- // This function is used to provide a smooth acceleration and deceleration effect during scrolling -->
+  
+    function scrollStep(timestamp) {
+      const currentTime = timestamp - startTime;
+  
+      window.scrollTo(0, easeInOutQuad(currentTime, start, distance, duration));
+  
+      if (currentTime < duration) {
+        requestAnimationFrame(scrollStep);
+      }
+    }
+    // <!-- // This function is a recursive function that uses requestAnimationFrame to create a smooth animation loop. -->
+  
+    requestAnimationFrame(scrollStep);
+  }
+  
+  smoothScrollToTop(2000); // Scroll to top in 1000 milliseconds 
+  
+</script>
+</body>
+</html>

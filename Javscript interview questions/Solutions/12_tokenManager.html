@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const setAuthToken = (token, expirationTime) => {
+            expirationTime = new Date().getTime() + expirationTime;
+
+            let tokenData = {
+                token: token,
+                expirationTime: expirationTime
+            };
+
+            localStorage.setItem('authToken', JSON.stringify(tokenData));
+        };
+
+        const getToken = () => {
+            let storedTokenData = localStorage.getItem('authToken');
+
+            if (storedTokenData) {
+                let parsedTokenData = JSON.parse(storedTokenData);
+                let { token, expirationTime } = parsedTokenData;
+
+                if (token && expirationTime && new Date().getTime() < expirationTime) {
+                    return token;
+                } else {
+                    clearToken();
+                    return null;
+                }
+            } else {
+                return null;
+            }
+        };
+
+        const clearToken = () => {
+            localStorage.removeItem('authToken');
+        };
+
+        const authToken = 'authentication token';
+        const expirationTime = 30;
+
+        setAuthToken(authToken, expirationTime);
+        let token = getToken();
+        console.log(token);
+    </script>
+</body>
+
+</html>
