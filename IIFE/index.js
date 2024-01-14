@@ -15,3 +15,5 @@ let a = ()=>{
     console.log(d);
 })()
 //immediately invoked function expressions  
+// IIFE is commonly used to encapsulate code and prevent variables and functions from interfering with the global scope. 
+// It's a way to create a self-contained module or block of code that runs immediately without leaving any trace in the global scope.
